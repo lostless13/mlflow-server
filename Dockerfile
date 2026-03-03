@@ -10,7 +10,11 @@ RUN pip install mlflow \
 # Set the container port (Cloud Run's default)
 EXPOSE 8080
 
-# This is the command that will run
-CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "8080", "--no-serve-artifacts"]
+CMD mlflow server \
+    --host 0.0.0.0 \
+    --port 8080 \
+    --backend-store-uri ${MLFLOW_BACKEND_STORE_URI} \
+    --default-artifact-root ${MLFLOW_DEFAULT_ARTIFACT_ROOT} \
+    --no-serve-artifacts
 
 # gcloud builds submit --tag us-central1-docker.pkg.dev/cam-triangle/elysian-docker/mlflow-server
