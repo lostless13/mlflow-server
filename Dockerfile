@@ -10,6 +10,9 @@ RUN pip install mlflow \
 # Set the container port (Cloud Run's default)
 EXPOSE 8080
 
+# CMD mlflow gc --backend-store-uri ${MLFLOW_BACKEND_STORE_URI} \
+#     --default-artifact-root ${MLFLOW_DEFAULT_ARTIFACT_ROOT}
+
 CMD mlflow server \
     --host 0.0.0.0 \
     --port 8080 \
